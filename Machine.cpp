@@ -4,12 +4,20 @@ Machine::Machine() : memory(2*1024), cpu(memory)
 {
 
 }
+
+Machine::Machine(int memorysize) : memory(memorysize), cpu(memory)
+{
+
+}
+
 Machine::Machine(Memory& memory) : cpu(memory), memory(memory)
 {
 }
+
 Machine::Machine(CPU& cpu, Memory& memory) : cpu(cpu), memory(memory)
 {
 }
+
 Machine::~Machine()
 {
 }

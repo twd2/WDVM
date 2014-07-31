@@ -45,9 +45,18 @@
 
 cpubasetype CPU::getIntRegisterValue(cpubasetype id)
 {
-    if (id > CPU_Reg_r7) return -222; //is float reg
-    if (id == CPU_Reg_ebp) return ebp;
-    if (id == CPU_Reg_esp) return esp;
+    if (id == CPU_Reg_esp)
+    {
+        return esp;
+    }
+    if (id == CPU_Reg_ebp)
+    {
+        return ebp;
+    }
+    if (id >= CPU_Reg_f0) //is float register
+    {
+        return 0;
+    }
     if (id <= CPU_Reg_esfp)
     {
         if (id <= CPU_Reg_cl)
@@ -321,42 +330,8 @@ cpubasetype CPU::getIntRegisterValue(cpubasetype id)
                     }
                     else
                     {
-                        //is float reg
-                        return 0;
-                    }
-                }
-                else
-                {
-                    //is float reg
-                    return 0;
-                }
-            }
-            else
-            {
-                //is float reg
-                return 0;
-            }
-        }
-    }
-    return -222;
-}
-
-double CPU::getFloatRegisterValue(cpubasetype id)
-{
-    if (id < CPU_Reg_f0) return -222.0; //is int reg
-            if (id <= CPU_Reg_f2)
-            {
-                if (id <= CPU_Reg_f0)
-                {
-                    if (id <= CPU_Reg_r7)
-                    {
-                        //is int reg
-                        return 0.0;
-                    }
-                    else
-                    {
                         //CPU_Reg_f0
-                        return f0;
+                        return 0;
                     }
                 }
                 else
@@ -364,12 +339,12 @@ double CPU::getFloatRegisterValue(cpubasetype id)
                     if (id <= CPU_Reg_f1)
                     {
                         //CPU_Reg_f1
-                        return f1;
+                        return 0;
                     }
                     else
                     {
                         //CPU_Reg_f2
-                        return f2;
+                        return 0;
                     }
                 }
             }
@@ -382,18 +357,18 @@ double CPU::getFloatRegisterValue(cpubasetype id)
                         if (id <= CPU_Reg_f3)
                         {
                             //CPU_Reg_f3
-                            return f3;
+                            return 0;
                         }
                         else
                         {
                             //CPU_Reg_f4
-                            return f4;
+                            return 0;
                         }
                     }
                     else
                     {
                         //CPU_Reg_f5
-                        return f5;
+                        return 0;
                     }
                 }
                 else
@@ -401,29 +376,32 @@ double CPU::getFloatRegisterValue(cpubasetype id)
                     if (id <= CPU_Reg_f6)
                     {
                         //CPU_Reg_f6
-                        return f6;
+                        return 0;
                     }
                     else
                     {
                         //CPU_Reg_f7
-                        return f7;
+                        return 0;
                     }
                 }
             }
-            return -222.0;
+        }
+    }
 }
-
 void CPU::setIntRegisterValue(cpubasetype id, cpubasetype data)
 {
-    if (id > CPU_Reg_r7) return; //is float reg
+    if (id == CPU_Reg_esp)
+    {
+        esp=data;
+        return;
+    }
     if (id == CPU_Reg_ebp)
     {
         ebp=data;
         return;
     }
-    if (id == CPU_Reg_esp)
+    if (id >= CPU_Reg_f0) //is float register
     {
-        esp=data;
         return;
     }
     if (id <= CPU_Reg_esfp)
@@ -699,36 +677,677 @@ void CPU::setIntRegisterValue(cpubasetype id, cpubasetype data)
                     }
                     else
                     {
-                        //is float reg
+                        //CPU_Reg_f0
                         return;
                     }
                 }
                 else
                 {
-                    //is float reg
-                    return;
+                    if (id <= CPU_Reg_f1)
+                    {
+                        //CPU_Reg_f1
+                        return;
+                    }
+                    else
+                    {
+                        //CPU_Reg_f2
+                        return;
+                    }
                 }
             }
             else
             {
-                //is float reg
-                return;
+                if (id <= CPU_Reg_f5)
+                {
+                    if (id <= CPU_Reg_f4)
+                    {
+                        if (id <= CPU_Reg_f3)
+                        {
+                            //CPU_Reg_f3
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_f4
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_f5
+                        return;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_f6)
+                    {
+                        //CPU_Reg_f6
+                        return;
+                    }
+                    else
+                    {
+                        //CPU_Reg_f7
+                        return;
+                    }
+                }
             }
         }
     }
 }
-
-void CPU::setFloatRegisterValue(cpubasetype id, double data)
+double CPU::getFloatRegisterValue(cpubasetype id)
 {
-    if (id < CPU_Reg_f0) return; //is int reg
+    if (id <= CPU_Reg_r7) //is int register
+    {
+        return 0.0;
+    }
+    if (id <= CPU_Reg_esfp)
+    {
+        if (id <= CPU_Reg_cl)
+        {
+            if (id <= CPU_Reg_bx)
+            {
+                if (id <= CPU_Reg_al)
+                {
+                    if (id <= CPU_Reg_ax)
+                    {
+                        if (id <= CPU_Reg_eax)
+                        {
+                            //CPU_Reg_eax
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_ax
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_al
+                        return 0.0;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_ebx)
+                    {
+                        if (id <= CPU_Reg_ah)
+                        {
+                            //CPU_Reg_ah
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_ebx
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_bx
+                        return 0.0;
+                    }
+                }
+            }
+            else
+            {
+                if (id <= CPU_Reg_ecx)
+                {
+                    if (id <= CPU_Reg_bh)
+                    {
+                        if (id <= CPU_Reg_bl)
+                        {
+                            //CPU_Reg_bl
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_bh
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_ecx
+                        return 0.0;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_cx)
+                    {
+                        //CPU_Reg_cx
+                        return 0.0;
+                    }
+                    else
+                    {
+                        //CPU_Reg_cl
+                        return 0.0;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (id <= CPU_Reg_dh)
+            {
+                if (id <= CPU_Reg_dx)
+                {
+                    if (id <= CPU_Reg_edx)
+                    {
+                        if (id <= CPU_Reg_ch)
+                        {
+                            //CPU_Reg_ch
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_edx
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_dx
+                        return 0.0;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_dl)
+                    {
+                        //CPU_Reg_dl
+                        return 0.0;
+                    }
+                    else
+                    {
+                        //CPU_Reg_dh
+                        return 0.0;
+                    }
+                }
+            }
+            else
+            {
+                if (id <= CPU_Reg_ebp)
+                {
+                    if (id <= CPU_Reg_sp)
+                    {
+                        if (id <= CPU_Reg_esp)
+                        {
+                            //CPU_Reg_esp
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_sp
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_ebp
+                        return 0.0;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_bp)
+                    {
+                        //CPU_Reg_bp
+                        return 0.0;
+                    }
+                    else
+                    {
+                        //CPU_Reg_esfp
+                        return 0.0;
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        if (id <= CPU_Reg_r5)
+        {
+            if (id <= CPU_Reg_r0)
+            {
+                if (id <= CPU_Reg_bfp)
+                {
+                    if (id <= CPU_Reg_ebfp)
+                    {
+                        if (id <= CPU_Reg_sfp)
+                        {
+                            //CPU_Reg_sfp
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_ebfp
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_bfp
+                        return 0.0;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_ip)
+                    {
+                        if (id <= CPU_Reg_eip)
+                        {
+                            //CPU_Reg_eip
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_ip
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_r0
+                        return 0.0;
+                    }
+                }
+            }
+            else
+            {
+                if (id <= CPU_Reg_r3)
+                {
+                    if (id <= CPU_Reg_r2)
+                    {
+                        if (id <= CPU_Reg_r1)
+                        {
+                            //CPU_Reg_r1
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_r2
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_r3
+                        return 0.0;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_r4)
+                    {
+                        //CPU_Reg_r4
+                        return 0.0;
+                    }
+                    else
+                    {
+                        //CPU_Reg_r5
+                        return 0.0;
+                    }
+                }
+            }
+        }
+        else
+        {
             if (id <= CPU_Reg_f2)
             {
                 if (id <= CPU_Reg_f0)
                 {
                     if (id <= CPU_Reg_r7)
                     {
-                        //is int reg
+                        if (id <= CPU_Reg_r6)
+                        {
+                            //CPU_Reg_r6
+                            return 0.0;
+                        }
+                        else
+                        {
+                            //CPU_Reg_r7
+                            return 0.0;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_f0
+                        return f0;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_f1)
+                    {
+                        //CPU_Reg_f1
+                        return f1;
+                    }
+                    else
+                    {
+                        //CPU_Reg_f2
+                        return f2;
+                    }
+                }
+            }
+            else
+            {
+                if (id <= CPU_Reg_f5)
+                {
+                    if (id <= CPU_Reg_f4)
+                    {
+                        if (id <= CPU_Reg_f3)
+                        {
+                            //CPU_Reg_f3
+                            return f3;
+                        }
+                        else
+                        {
+                            //CPU_Reg_f4
+                            return f4;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_f5
+                        return f5;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_f6)
+                    {
+                        //CPU_Reg_f6
+                        return f6;
+                    }
+                    else
+                    {
+                        //CPU_Reg_f7
+                        return f7;
+                    }
+                }
+            }
+        }
+    }
+}
+void CPU::setFloatRegisterValue(cpubasetype id, double data)
+{
+    if (id <= CPU_Reg_r7) //is int register
+    {
+        return;
+    }
+    if (id <= CPU_Reg_esfp)
+    {
+        if (id <= CPU_Reg_cl)
+        {
+            if (id <= CPU_Reg_bx)
+            {
+                if (id <= CPU_Reg_al)
+                {
+                    if (id <= CPU_Reg_ax)
+                    {
+                        if (id <= CPU_Reg_eax)
+                        {
+                            //CPU_Reg_eax
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_ax
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_al
                         return;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_ebx)
+                    {
+                        if (id <= CPU_Reg_ah)
+                        {
+                            //CPU_Reg_ah
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_ebx
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_bx
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                if (id <= CPU_Reg_ecx)
+                {
+                    if (id <= CPU_Reg_bh)
+                    {
+                        if (id <= CPU_Reg_bl)
+                        {
+                            //CPU_Reg_bl
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_bh
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_ecx
+                        return;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_cx)
+                    {
+                        //CPU_Reg_cx
+                        return;
+                    }
+                    else
+                    {
+                        //CPU_Reg_cl
+                        return;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (id <= CPU_Reg_dh)
+            {
+                if (id <= CPU_Reg_dx)
+                {
+                    if (id <= CPU_Reg_edx)
+                    {
+                        if (id <= CPU_Reg_ch)
+                        {
+                            //CPU_Reg_ch
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_edx
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_dx
+                        return;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_dl)
+                    {
+                        //CPU_Reg_dl
+                        return;
+                    }
+                    else
+                    {
+                        //CPU_Reg_dh
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                if (id <= CPU_Reg_ebp)
+                {
+                    if (id <= CPU_Reg_sp)
+                    {
+                        if (id <= CPU_Reg_esp)
+                        {
+                            //CPU_Reg_esp
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_sp
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_ebp
+                        return;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_bp)
+                    {
+                        //CPU_Reg_bp
+                        return;
+                    }
+                    else
+                    {
+                        //CPU_Reg_esfp
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        if (id <= CPU_Reg_r5)
+        {
+            if (id <= CPU_Reg_r0)
+            {
+                if (id <= CPU_Reg_bfp)
+                {
+                    if (id <= CPU_Reg_ebfp)
+                    {
+                        if (id <= CPU_Reg_sfp)
+                        {
+                            //CPU_Reg_sfp
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_ebfp
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_bfp
+                        return;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_ip)
+                    {
+                        if (id <= CPU_Reg_eip)
+                        {
+                            //CPU_Reg_eip
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_ip
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_r0
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                if (id <= CPU_Reg_r3)
+                {
+                    if (id <= CPU_Reg_r2)
+                    {
+                        if (id <= CPU_Reg_r1)
+                        {
+                            //CPU_Reg_r1
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_r2
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //CPU_Reg_r3
+                        return;
+                    }
+                }
+                else
+                {
+                    if (id <= CPU_Reg_r4)
+                    {
+                        //CPU_Reg_r4
+                        return;
+                    }
+                    else
+                    {
+                        //CPU_Reg_r5
+                        return;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (id <= CPU_Reg_f2)
+            {
+                if (id <= CPU_Reg_f0)
+                {
+                    if (id <= CPU_Reg_r7)
+                    {
+                        if (id <= CPU_Reg_r6)
+                        {
+                            //CPU_Reg_r6
+                            return;
+                        }
+                        else
+                        {
+                            //CPU_Reg_r7
+                            return;
+                        }
                     }
                     else
                     {
@@ -787,4 +1406,6 @@ void CPU::setFloatRegisterValue(cpubasetype id, double data)
                     }
                 }
             }
+        }
+    }
 }

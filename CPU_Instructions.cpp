@@ -61,17 +61,18 @@
 
 void CPU::executeInstruction(InstructionInfo& ii)
 {
-    if (ii.ID <= CPU_Ins_incf)
+    unsigned short id = ii.ID;
+    if (id <= CPU_Ins_incf)
     {
-        if (ii.ID <= CPU_Ins_xor)
+        if (id <= CPU_Ins_xor)
         {
-            if (ii.ID <= CPU_Ins_pushi)
+            if (id <= CPU_Ins_pushi)
             {
-                if (ii.ID <= CPU_Ins_ldrf)
+                if (id <= CPU_Ins_ldrf)
                 {
-                    if (ii.ID <= CPU_Ins_hlt)
+                    if (id <= CPU_Ins_hlt)
                     {
-                        if (ii.ID <= CPU_Ins_nop)
+                        if (id <= CPU_Ins_nop)
                         {
                             //CPU_Ins_nop
                             //nop~
@@ -84,7 +85,7 @@ void CPU::executeInstruction(InstructionInfo& ii)
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_ldri)
+                        if (id <= CPU_Ins_ldri)
                         {
                             //CPU_Ins_ldri
                             cpubasetype addr=popi();
@@ -114,9 +115,9 @@ void CPU::executeInstruction(InstructionInfo& ii)
                 }
                 else
                 {
-                    if (ii.ID <= CPU_Ins_strf)
+                    if (id <= CPU_Ins_strf)
                     {
-                        if (ii.ID <= CPU_Ins_stri)
+                        if (id <= CPU_Ins_stri)
                         {
                             //CPU_Ins_stri
                             cpubasetype data=popi();
@@ -149,7 +150,7 @@ void CPU::executeInstruction(InstructionInfo& ii)
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_popi)
+                        if (id <= CPU_Ins_popi)
                         {
                             //CPU_Ins_popi
                             if (ii.pi.size()>0)
@@ -171,11 +172,11 @@ void CPU::executeInstruction(InstructionInfo& ii)
             }
             else
             {
-                if (ii.ID <= CPU_Ins_ftoi)
+                if (id <= CPU_Ins_ftoi)
                 {
-                    if (ii.ID <= CPU_Ins_pushf)
+                    if (id <= CPU_Ins_pushf)
                     {
-                        if (ii.ID <= CPU_Ins_popf)
+                        if (id <= CPU_Ins_popf)
                         {
                             //CPU_Ins_popf
                             if (ii.pi.size()>0)
@@ -190,12 +191,12 @@ void CPU::executeInstruction(InstructionInfo& ii)
                         else
                         {
                             //CPU_Ins_pushf
-                            pushi(getFloatValue(ii.pi[0]));
+                            pushf(getFloatValue(ii.pi[0]));
                         }
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_itof)
+                        if (id <= CPU_Ins_itof)
                         {
                             //CPU_Ins_itof
                             pushf((double)popi());
@@ -209,9 +210,9 @@ void CPU::executeInstruction(InstructionInfo& ii)
                 }
                 else
                 {
-                    if (ii.ID <= CPU_Ins_or)
+                    if (id <= CPU_Ins_or)
                     {
-                        if (ii.ID <= CPU_Ins_and)
+                        if (id <= CPU_Ins_and)
                         {
                             //CPU_Ins_and
                             cpubasetype a, b;
@@ -241,13 +242,13 @@ void CPU::executeInstruction(InstructionInfo& ii)
         }
         else
         {
-            if (ii.ID <= CPU_Ins_inci)
+            if (id <= CPU_Ins_inci)
             {
-                if (ii.ID <= CPU_Ins_muli)
+                if (id <= CPU_Ins_muli)
                 {
-                    if (ii.ID <= CPU_Ins_addi)
+                    if (id <= CPU_Ins_addi)
                     {
-                        if (ii.ID <= CPU_Ins_not)
+                        if (id <= CPU_Ins_not)
                         {
                             //CPU_Ins_not
                             pushi(~popi());
@@ -263,7 +264,7 @@ void CPU::executeInstruction(InstructionInfo& ii)
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_subi)
+                        if (id <= CPU_Ins_subi)
                         {
                             //CPU_Ins_subi
                             cpubasetype a, b;
@@ -283,9 +284,9 @@ void CPU::executeInstruction(InstructionInfo& ii)
                 }
                 else
                 {
-                    if (ii.ID <= CPU_Ins_negi)
+                    if (id <= CPU_Ins_negi)
                     {
-                        if (ii.ID <= CPU_Ins_divi)
+                        if (id <= CPU_Ins_divi)
                         {
                             //CPU_Ins_divi
                             cpubasetype a, b;
@@ -318,11 +319,11 @@ void CPU::executeInstruction(InstructionInfo& ii)
             }
             else
             {
-                if (ii.ID <= CPU_Ins_mulf)
+                if (id <= CPU_Ins_mulf)
                 {
-                    if (ii.ID <= CPU_Ins_addf)
+                    if (id <= CPU_Ins_addf)
                     {
-                        if (ii.ID <= CPU_Ins_deci)
+                        if (id <= CPU_Ins_deci)
                         {
                             //CPU_Ins_deci
                             pushi(popi()-1);
@@ -338,7 +339,7 @@ void CPU::executeInstruction(InstructionInfo& ii)
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_subf)
+                        if (id <= CPU_Ins_subf)
                         {
                             //CPU_Ins_subf
                             double a, b;
@@ -358,9 +359,9 @@ void CPU::executeInstruction(InstructionInfo& ii)
                 }
                 else
                 {
-                    if (ii.ID <= CPU_Ins_negf)
+                    if (id <= CPU_Ins_negf)
                     {
-                        if (ii.ID <= CPU_Ins_divf)
+                        if (id <= CPU_Ins_divf)
                         {
                             //CPU_Ins_divf
                             double a, b;
@@ -385,15 +386,15 @@ void CPU::executeInstruction(InstructionInfo& ii)
     }
     else
     {
-        if (ii.ID <= CPU_Ins_shr)
+        if (id <= CPU_Ins_shr)
         {
-            if (ii.ID <= CPU_Ins_gtf)
+            if (id <= CPU_Ins_gtf)
             {
-                if (ii.ID <= CPU_Ins_lti)
+                if (id <= CPU_Ins_lti)
                 {
-                    if (ii.ID <= CPU_Ins_gti)
+                    if (id <= CPU_Ins_gti)
                     {
-                        if (ii.ID <= CPU_Ins_decf)
+                        if (id <= CPU_Ins_decf)
                         {
                             //CPU_Ins_decf
                             pushf(popf()-1);
@@ -409,7 +410,7 @@ void CPU::executeInstruction(InstructionInfo& ii)
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_gtei)
+                        if (id <= CPU_Ins_gtei)
                         {
                             //CPU_Ins_gtei
                             cpubasetype a, b;
@@ -429,9 +430,9 @@ void CPU::executeInstruction(InstructionInfo& ii)
                 }
                 else
                 {
-                    if (ii.ID <= CPU_Ins_eqi)
+                    if (id <= CPU_Ins_eqi)
                     {
-                        if (ii.ID <= CPU_Ins_ltei)
+                        if (id <= CPU_Ins_ltei)
                         {
                             //CPU_Ins_ltei
                             cpubasetype a, b;
@@ -450,7 +451,7 @@ void CPU::executeInstruction(InstructionInfo& ii)
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_neqi)
+                        if (id <= CPU_Ins_neqi)
                         {
                             //CPU_Ins_neqi
                             cpubasetype a, b;
@@ -471,11 +472,11 @@ void CPU::executeInstruction(InstructionInfo& ii)
             }
             else
             {
-                if (ii.ID <= CPU_Ins_eqf)
+                if (id <= CPU_Ins_eqf)
                 {
-                    if (ii.ID <= CPU_Ins_ltf)
+                    if (id <= CPU_Ins_ltf)
                     {
-                        if (ii.ID <= CPU_Ins_gtef)
+                        if (id <= CPU_Ins_gtef)
                         {
                             //CPU_Ins_gtef
                             double a, b;
@@ -494,7 +495,7 @@ void CPU::executeInstruction(InstructionInfo& ii)
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_ltef)
+                        if (id <= CPU_Ins_ltef)
                         {
                             //CPU_Ins_ltef
                             double a, b;
@@ -514,9 +515,9 @@ void CPU::executeInstruction(InstructionInfo& ii)
                 }
                 else
                 {
-                    if (ii.ID <= CPU_Ins_shl)
+                    if (id <= CPU_Ins_shl)
                     {
-                        if (ii.ID <= CPU_Ins_neqf)
+                        if (id <= CPU_Ins_neqf)
                         {
                             //CPU_Ins_neqf
                             double a, b;
@@ -546,13 +547,13 @@ void CPU::executeInstruction(InstructionInfo& ii)
         }
         else
         {
-            if (ii.ID <= CPU_Ins_popreg)
+            if (id <= CPU_Ins_popreg)
             {
-                if (ii.ID <= CPU_Ins_call)
+                if (id <= CPU_Ins_call)
                 {
-                    if (ii.ID <= CPU_Ins_jt)
+                    if (id <= CPU_Ins_jt)
                     {
-                        if (ii.ID <= CPU_Ins_jmp)
+                        if (id <= CPU_Ins_jmp)
                         {
                             //CPU_Ins_jmp
                             eip = getIntValue(ii.pi[0]);
@@ -565,7 +566,7 @@ void CPU::executeInstruction(InstructionInfo& ii)
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_jf)
+                        if (id <= CPU_Ins_jf)
                         {
                             //CPU_Ins_jf
                             if (!(popi()&1)) eip = getIntValue(ii.pi[0]);
@@ -580,9 +581,9 @@ void CPU::executeInstruction(InstructionInfo& ii)
                 }
                 else
                 {
-                    if (ii.ID <= CPU_Ins_pushreg)
+                    if (id <= CPU_Ins_pushreg)
                     {
-                        if (ii.ID <= CPU_Ins_ret)
+                        if (id <= CPU_Ins_ret)
                         {
                             //CPU_Ins_ret
                             eip = popi();
@@ -602,26 +603,24 @@ void CPU::executeInstruction(InstructionInfo& ii)
             }
             else
             {
-                if (ii.ID <= CPU_Ins_sei)
+                if (id <= CPU_Ins_sei)
                 {
-                    if (ii.ID <= CPU_Ins_randf)
+                    if (id <= CPU_Ins_randf)
                     {
-                        if (ii.ID <= CPU_Ins_randi)
+                        if (id <= CPU_Ins_randi)
                         {
                             //CPU_Ins_randi
-                            //TODO
-                            pushi(0);
+                            pushi(0); //TODO
                         }
                         else
                         {
                             //CPU_Ins_randf
-                            //TODO
-                            pushf(0);
+                            pushf(0); //TODO
                         }
                     }
                     else
                     {
-                        if (ii.ID <= CPU_Ins_cli)
+                        if (id <= CPU_Ins_cli)
                         {
                             //CPU_Ins_cli
                             InterruptEnable=false;
@@ -635,9 +634,9 @@ void CPU::executeInstruction(InstructionInfo& ii)
                 }
                 else
                 {
-                    if (ii.ID <= CPU_Ins_jint)
+                    if (id <= CPU_Ins_jint)
                     {
-                        if (ii.ID <= CPU_Ins_int)
+                        if (id <= CPU_Ins_int)
                         {
                             //CPU_Ins_int
                             Interrupt(getIntValue(ii.pi[0]));

@@ -21,7 +21,7 @@ CPU::~CPU()
 void CPU::start()
 {
     isRunning=true;
-    printf("CPU start\n");
+    //printf("CPU start\n");
 }
 
 void CPU::halt()

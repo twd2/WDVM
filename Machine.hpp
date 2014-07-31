@@ -21,8 +21,9 @@ class Machine
         CPU cpu;
         FILE *hdd;
         Machine();
-        Machine(Memory& memory);
-        Machine(CPU& cpu, Memory& memory);
+        Machine(int);
+        Machine(Memory& );
+        Machine(CPU& , Memory& );
         ~Machine();
         void load(FILE *);
         bool load(const char *);
